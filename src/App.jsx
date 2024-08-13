@@ -1,9 +1,9 @@
 import React from 'react';
 import Game from './components/Game';
-
+import bg from './assets/background/bg.png'
 function App() {
   return (
-    <div className='bg-main-bg bg-cover bg-center'  style={{ backgroundImage: `url('./src/assets/background/bg.png')` }} >
+    <div className='bg-main-bg bg-cover bg-center'  style={{ backgroundImage: `url(${bg})` }} >
       <Game />
     </div>
   );
