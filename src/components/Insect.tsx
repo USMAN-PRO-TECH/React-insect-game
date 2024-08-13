@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import { useDrag, DragSourceMonitor, } from "react-dnd";
+import { useDrag, DragSourceMonitor } from "react-dnd";
 import { useMyContext } from "../context/Context";
 
 interface InsectProps {
@@ -8,13 +8,14 @@ interface InsectProps {
   id: number;
   imgSrc: string;
 }
+
 interface DropResult {
-  name: string; 
+  name: string;
 }
 
 const getRandomPosition = () => ({
-  x: Math.floor(Math.random() * 2000), // Adjust the range as needed
-  y: Math.floor(Math.random() * 800), // Adjust the range as needed
+  x: Math.floor(Math.random() * window.innerWidth),
+  y: Math.floor(Math.random() * window.innerHeight),
 });
 
 const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
@@ -36,13 +37,14 @@ const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
       } else {
         const delta = monitor.getDifferenceFromInitialOffset();
         if (delta) {
-          const newX = position.x + delta.x;
-          const newY = position.y + delta.y;
+          const newX = Math.max(0, Math.min(window.innerWidth - 50, position.x + delta.x));
+          const newY = Math.max(0, Math.min(window.innerHeight - 50, position.y + delta.y));
           setPosition({ x: newX, y: newY });
         }
       }
     },
   });
+
   const handleDrag = (event: React.MouseEvent | React.TouchEvent) => {
     event.preventDefault();
     const rect = (event.target as HTMLElement).getBoundingClientRect();
@@ -63,7 +65,6 @@ const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
       }}
     >
       <img src={imgSrc} alt={`${type} Insect`} className="insect-image" />
-      
     </Box>
   );
 };
