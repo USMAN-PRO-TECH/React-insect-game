@@ -5,11 +5,11 @@ import Loader from './components/Loader';
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const Navbar = lazy(() =>
-  delay(2000).then(() => import('./components/Navbar'))
+  delay(1000).then(() => import('./components/Navbar'))
 );
 
 const Main = lazy(() =>
-  delay(2000).then(() => import('./components/Main'))
+  delay(1000).then(() => import('./components/Main'))
 );
 
 const App = () => {

@@ -11,8 +11,14 @@ interface InsectProps {
 interface DropResult {
   name: string; 
 }
+
+const getRandomPosition = () => ({
+  x: Math.floor(Math.random() * 2000), // Adjust the range as needed
+  y: Math.floor(Math.random() * 800), // Adjust the range as needed
+});
+
 const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 100, y: 200 });
+  const [position, setPosition] = useState<{ x: number; y: number }>(getRandomPosition());
 
   const { handleDrag: onDrag, handleInsectEat: onEat } = useMyContext();
 
@@ -57,6 +63,7 @@ const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
       }}
     >
       <img src={imgSrc} alt={`${type} Insect`} className="insect-image" />
+      
     </Box>
   );
 };

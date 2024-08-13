@@ -18,6 +18,9 @@ const EatInsect: React.FC<EatInsectProps> = ({ onDrop, children }) => {
       if (onDrop) {
         onDrop();
       }
+      setTimeout(() => {
+        setDropped(false);
+      }, 1000);
       return { name: "mouth" };
     },
     collect: (monitor) => ({
