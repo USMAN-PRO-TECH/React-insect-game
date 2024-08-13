@@ -9,14 +9,6 @@ import Insect from './Insect';
 import bg from '../assets/background/bg.png'
 import { useMyContext } from '../context/Context';
 
-// types for the insect data
-interface InsectData {
-  id: number;
-  type: string;
-  imgSrc: string;
-  name: string;
-}
-
 const Main: React.FC = () => {
   const { insects } = useMyContext();
 
@@ -27,20 +19,19 @@ const Main: React.FC = () => {
           paddingTop: '100px',
           width: '100vw',
           height: '100vh',
-          backgroundImage:
-            `url(${bg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+          backgroundImage: `url(${bg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <Container>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
-            {insectsData.map((insect: InsectData) => (
+            {insectsData.map((insect) => (
               <InsectButton key={insect.id} imgSrc={insect.imgSrc} name={insect.name} />
             ))}
           </Box>
           <Owl />
-          {insects.map((insect: InsectData) => (
+          {insects.map((insect) => (
             <Insect key={insect.id} id={insect.id} type={insect.type} imgSrc={insect.imgSrc} />
           ))}
         </Container>

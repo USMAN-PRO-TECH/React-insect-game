@@ -5,6 +5,7 @@ import InsectButton from "./InsectButton";
 
 // types for the insect data
 interface InsectData {
+  id: number;
   imgSrc: string;
   name: string;
 }

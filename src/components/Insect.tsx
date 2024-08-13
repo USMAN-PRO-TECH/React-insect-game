@@ -1,23 +1,18 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import { useDrag, DragSourceMonitor } from "react-dnd";
+import { useDrag, DragSourceMonitor, } from "react-dnd";
 import { useMyContext } from "../context/Context";
 
-// types for the props
 interface InsectProps {
   type: string;
-  id: string;
+  id: number;
   imgSrc: string;
 }
-
-// types for the position state
-interface Position {
-  x: number;
-  y: number;
+interface DropResult {
+  name: string; 
 }
-
 const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
-  const [position, setPosition] = useState<Position>({ x: 100, y: 200 });
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 100, y: 200 });
 
   const { handleDrag: onDrag, handleInsectEat: onEat } = useMyContext();
 
@@ -28,10 +23,10 @@ const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
       isDragging: monitor.isDragging(),
       delta: monitor.getDifferenceFromInitialOffset(),
     }),
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult();
+    end: (item, monitor: DragSourceMonitor) => {
+      const dropResult = monitor.getDropResult() as DropResult;
       if (dropResult && dropResult.name === "mouth") {
-        onEat(id);
+        onEat(id); // Assuming id is expected as a string in onEat function
       } else {
         const delta = monitor.getDifferenceFromInitialOffset();
         if (delta) {
@@ -42,7 +37,6 @@ const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
       }
     },
   });
-
   const handleDrag = (event: React.MouseEvent | React.TouchEvent) => {
     event.preventDefault();
     const rect = (event.target as HTMLElement).getBoundingClientRect();
@@ -62,7 +56,7 @@ const Insect: React.FC<InsectProps> = ({ type, id, imgSrc }) => {
         top: position.y,
       }}
     >
-      <img src={imgSrc} alt={`${type} Insect`} className="insect-image"  />
+      <img src={imgSrc} alt={`${type} Insect`} className="insect-image" />
     </Box>
   );
 };

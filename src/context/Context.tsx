@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+// Context.tsx
+import { createContext, useContext, useState, ReactNode } from "react";
 import { insectsData } from "../data/insectsData";
 
 // Define types for the context values

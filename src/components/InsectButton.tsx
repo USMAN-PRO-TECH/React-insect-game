@@ -8,7 +8,7 @@ interface InsectButtonProps {
   name: string;
 }
 
-const InsectButton: React.FC<InsectButtonProps> = ({ imgSrc, name }) => {
+const InsectButton: React.FC<InsectButtonProps> = ({  imgSrc, name }) => {
   const { addInsect } = useMyContext();
 
   return (
